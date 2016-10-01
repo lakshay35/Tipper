@@ -28,7 +28,8 @@ class ViewController: UIViewController {
     
     func updateLabel() {
         let total: Double = ((Double(tip)/100.00) * Double(bill)) + Double(bill)
-        totalLabel.text = String(total)
+         //let total: Double = ((Double(tip)/100.00) * bill) + bill
+        totalLabel.text = "$" + String(total)
     }
 
     @IBAction func calculateTip(_ sender: UISlider) {
@@ -46,6 +47,7 @@ class ViewController: UIViewController {
         } else {
             billLabel.text = "$" + sender.currentTitle!
             bill = Int(sender.currentTitle!)!
+            //bill = Double(sender.currentTitle!)!
         }
         userTyping = true
         updateLabel()
