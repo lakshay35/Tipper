@@ -71,6 +71,15 @@ class ViewController: UIViewController {
         updateLabel()
     }
 
+    func presentRating() {
+        let alert = UIAlertController(title: "Rate Us?", message: "We would appreciate your rating", preferredStyle: .alert)
+        let rateAction = UIAlertAction(title: "Rate", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(rateAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     // Starts Counting Decimal Values
     @IBAction func dotPressed(_ sender: UIButton) {
         if dotNotPressed && userTyping {
