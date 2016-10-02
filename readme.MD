@@ -1,2 +1,2 @@
-A Simple Tip Calculator.
-Available on the IOS app store.
+<h1>A Simple Tip Calculator</h1>
+<p>Available on the IOS app store.</p>
