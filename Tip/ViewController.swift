@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var slider: UISlider!
+    @IBOutlet weak var tipAmount: UILabel!
     
     // Functional Variables
     var tip = 0
@@ -33,6 +34,8 @@ class ViewController: UIViewController {
         let total: Double = ((Double(tip)/100.00) * bill) + bill // Calculates Total
         let roundedValue = round(total * 100) // Rounds Total Value
         totalLabel.text = "$" + String(roundedValue / 100) // Updates Total Label
+        let tipValue = round(((Double(tip)/100.00) * bill) * 100)
+        tipAmount.text = "$" + String(tipValue/100)
     }
 
     // Calculates The Tip Decimal Value To Multiply With Bill Value
