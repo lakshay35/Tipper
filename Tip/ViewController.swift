@@ -8,43 +8,57 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController{
 
-    // Objects in View
+    /* 
+     Objects declaration
+    */
     @IBOutlet weak var billLabel: UILabel!
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var tipAmount: UILabel!
     
-    // Functional Variables
+    /* 
+     Functional variable declaration
+     */
     var tip = 0
     var bill = 0.0
     var userTyping = false
     var dotNotPressed = true
     var decimalValue = 0.0
+    var keysDisabled = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = true
+        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-    // Updates Total Label Value
+    
+    /*
+    Function to update total label value
+     */
     func updateLabel() {
-        let total: Double = ((Double(tip)/100.00) * bill) + bill // Calculates Total
-        let roundedValue = round(total * 100) // Rounds Total Value
-        totalLabel.text = "$" + String(roundedValue / 100) // Updates Total Label
+        let total = ((Double(tip)/100.00) * bill) + bill                    // Calculates Total
+        let roundedValue = round(total * 100)                               // Rounds Total Value
+        totalLabel.text = "$" + String(roundedValue / 100)                  // Updates Total Label
         let tipValue = round(((Double(tip)/100.00) * bill) * 100)
         tipAmount.text = "$" + String(tipValue/100)
     }
 
-    // Calculates The Tip Decimal Value To Multiply With Bill Value
+    /*
+    Calculates the tip decimal value to multiply with bill value
+     */
     @IBAction func calculateTip(_ sender: UISlider) {
         tipLabel.text = String(format: "%\(".2")f", round(slider.value * 30)) + "%"
         tip = Int(round(slider.value * 30))
-        updateLabel()     }
+        updateLabel()
+    }
     
-    // Updates Labels And Variable For Functionality
+    /* 
+    Updates labels and variable For Functionality
+     */
     @IBAction func numberPressed(_ sender: UIButton) {
         // If User Has Typed Atleast Once
         if userTyping {
@@ -59,8 +73,13 @@ class ViewController: UIViewController {
                 bill += decimalValue
             }
             else {
-                let number = String(Int(bill)) + sender.currentTitle!
-                bill = Double(number)!
+                if bill < Double(Int.max) {
+                    let number = String(Int(bill)) + sender.currentTitle!
+                    bill = Double(number)!
+                } else {
+                    overusageAlert()
+                    systemResetSettings()
+                }
             }
         }
         else { // Gets Executed If User Has Not Typed Even Once
@@ -73,15 +92,15 @@ class ViewController: UIViewController {
         // Live Updating Of Total Label
         updateLabel()
     }
-
-    func presentRating() {
-        let alert = UIAlertController(title: "Rate Us?", message: "We would appreciate your rating", preferredStyle: .alert)
-        let rateAction = UIAlertAction(title: "Rate", style: .default, handler: nil)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alert.addAction(rateAction)
-        alert.addAction(cancelAction)
+    
+    // Issues overusage
+    func overusageAlert() {
+        let alert = UIAlertController(title: "Warning: Too Much Power!", message: "You are attempting to use too much power. Settings are being reset", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Okay", style: .default, handler: nil)
+        alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
+    
     
     // Starts Counting Decimal Values
     @IBAction func dotPressed(_ sender: UIButton) {
@@ -94,13 +113,16 @@ class ViewController: UIViewController {
 
     // Resets Labels and Functional Variables
     @IBAction func clearBill(_ sender: UIButton) {
-        billLabel.text = "$0.00"
+        systemResetSettings()
+    }
+    
+    func systemResetSettings() { // Resets System variables
+        billLabel.text = "$"
         bill = 0
         userTyping = false
         dotNotPressed = true
         decimalValue = 0.0
         updateLabel()
     }
-    
 }
 

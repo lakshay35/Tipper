@@ -262,7 +262,7 @@
 				DEVELOPMENT_TEAM = 2625R2SZ5X;
 				INFOPLIST_FILE = Tip/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.LakshaySharma.Tip;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LakshaySharma.Tipper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -275,7 +275,7 @@
 				DEVELOPMENT_TEAM = 2625R2SZ5X;
 				INFOPLIST_FILE = Tip/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.LakshaySharma.Tip;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LakshaySharma.Tipper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -300,6 +300,7 @@
 				892A886D1D9DEBC1006657C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
